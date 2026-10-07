@@ -93,9 +93,10 @@
 ---
 
 ### Giai đoạn 4: Bonus Challenges (Tùy chọn, tối đa +15đ)
-- [ ] **Bonus B1 (+3đ)**: NB6 Merge adapter + Hot-swap (`notebooks/06_merge_and_serve.py`).
-- [ ] **Bonus B2 (+3đ)**: Dataset miền riêng $\ge 200$ mẫu.
+- [x] **Bonus B1 (+3đ)**: NB6 Merge adapter + Hot-swap (`notebooks/06_merge_and_serve.py`) — **XONG (merge_check.json: delta = 0.0000)**
+- [x] **Bonus B2 (+3đ)**: Dataset miền riêng $\ge 200$ mẫu — **XONG (250 mẫu Fintech + data/CUSTOM_DATASET.md)**
 - [ ] **Bonus B3 (+4đ)**: Hiện tượng Reasoning-trace collapse.
+
 - [ ] **Bonus B4 (+3đ)**: Quét rank có kiểm soát ($r \in \{8, 16, 64\}$).
 - [ ] **Bonus B5 (+2đ)**: Push adapter lên HuggingFace Hub.
 

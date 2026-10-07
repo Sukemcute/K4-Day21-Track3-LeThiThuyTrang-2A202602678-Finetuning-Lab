@@ -3,7 +3,8 @@
 *Ngắn gọn, thành thật. Phần này chấm theo độ cụ thể, không theo độ dài.*
 
 **1. Điều gì làm bạn ngạc nhiên nhất?**
-Điều làm tôi ngạc nhiên nhất là hiện tượng ở run `attn_only`: khi nâng rank lên tận $r=283$ để bù tham số cho việc chỉ gắn vào 2 ma trận $q, v$, train loss giảm xuống rất thấp (0.5384, thấp hơn cả mức 0.6257 của cấu hình chuẩn `correct`), nhưng khi đo độ chính xác target thực tế thì `attn_only` lại thua `correct` (0.9375 so với 0.9688). Điều này cho thấy train loss có thể là một thước đo đánh lừa nếu cấu hình vị trí adapter bị lệch.
+Điều làm tôi ngạc nhiên nhất là hiện tượng ở run `attn_only`: khi nâng rank lên tận $r=283$ để bù tham số cho việc chỉ gắn vào 2 ma trận $q, v$, train loss giảm xuống rất thấp (0.5373, thấp hơn nhiều so với mức 0.6265 của cấu hình chuẩn `correct`), nhưng khi đo độ chính xác target thực tế thì `attn_only` chỉ đạt 0.9700 (hoà với `correct` chứ không hề vượt trội hơn). Điều này cho thấy train loss thấp chỉ là biểu hiện của việc học vẹt (overfit) cục bộ ở một nhóm tầng, và nó là một thước đo đánh lừa nếu cấu hình vị trí adapter bị lệch.
+
 
 **2. Bạn mất nhiều thời gian nhất ở đâu? Nó có phải chỗ bạn dự đoán không?**
 Tôi mất nhiều thời gian nhất ở khâu sinh văn bản autoregressive trong quá trình đánh giá (NB2 và NB5) khi phải decode tuần tự tập test qua nhiều mô hình/prompt đối chứng. Ban đầu tôi dự đoán giai đoạn backward pass huấn luyện LoRA ở NB3 và NB4 sẽ chiếm phần lớn thời gian, nhưng thực tế việc chạy inference nhiều lần để đánh giá 3 baseline tốn thời gian tương đương hoặc lâu hơn.
