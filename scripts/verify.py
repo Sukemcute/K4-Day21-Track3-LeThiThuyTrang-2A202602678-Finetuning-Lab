@@ -23,6 +23,12 @@ import sys
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
+if hasattr(sys.stdout, "reconfigure"):
+    sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+if hasattr(sys.stderr, "reconfigure"):
+    sys.stderr.reconfigure(encoding="utf-8", errors="replace")
+
+
 OK, WARN, FAIL = "PASS", "WARN", "FAIL"
 results: list[tuple[str, str, str]] = []
 
@@ -32,7 +38,8 @@ def check(name: str, status: str, detail: str = "") -> None:
 
 
 def _sha(path: pathlib.Path) -> str:
-    return hashlib.sha256(path.read_bytes()).hexdigest()[:16]
+    return hashlib.sha256(path.read_bytes().replace(b'\r\n', b'\n')).hexdigest()[:16]
+
 
 
 def _load_json(path: pathlib.Path):
